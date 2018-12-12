@@ -35,12 +35,12 @@ CREATE TABLE IF NOT EXISTS `pago_facturas` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
--- Volcando datos para la tabla pplus.pago_facturas: 2 rows
+-- Volcando datos para la tabla pplus.pago_facturas: 3 rows
 /*!40000 ALTER TABLE `pago_facturas` DISABLE KEYS */;
 INSERT INTO `pago_facturas` (`id`, `nombres`, `cedula`, `n_factura`, `monto`, `usuario`) VALUES
 	(1, 'JUAN RAMIREZ', '1700393723654', '004547237294', 25.00, NULL),
 	(2, 'JOSE PANTO', '179934574743', '00485757466', 32.00, NULL),
-	(3, 'judelvis Rivas', '1745621', 'fac001', 5500.00, 1);
+	(4, 'judelvis tivas', '17456121', 'fac001', 1502.30, 1);
 /*!40000 ALTER TABLE `pago_facturas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla pplus.recargas
@@ -56,9 +56,9 @@ CREATE TABLE IF NOT EXISTS `recargas` (
 -- Volcando datos para la tabla pplus.recargas: 3 rows
 /*!40000 ALTER TABLE `recargas` DISABLE KEYS */;
 INSERT INTO `recargas` (`id`, `operador`, `numero`, `monto`, `usuario`) VALUES
-	(1, 1, '0984018400', 5.00, NULL),
-	(2, NULL, '0984018400', 10.00, NULL),
-	(3, 1, '88888', 5200.32, 1);
+	(1, 1, '09840184009', 155.00, 1),
+	(2, 1, '0984018400', 110.00, 1),
+	(4, 1, '434444', 13435.00, 1);
 /*!40000 ALTER TABLE `recargas` ENABLE KEYS */;
 
 -- Volcando estructura para tabla pplus.usuarios
