@@ -12,7 +12,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                 <div class="card-header border-0">
                   <div class="card-title text-center">
                     <div class="p-1">
-                      <img src="<?=ASSETS;?>img/brand.png" alt="GESDOC">
+                      <img src="<?=ASSETS;?>img/brand.png" alt="PAGO PLUS">
                     </div>
                   </div>
                 </div>

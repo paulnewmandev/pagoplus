@@ -7,8 +7,8 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
           <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
           <li class="nav-item">
             <a class="navbar-brand" href="<?=site_url('panel');?>">
-            <img src="<?=ASSETS;?>img/brand-logo.png" alt="GESDOC">
-              <h1 class="brand-text"><img src="<?=ASSETS;?>img/brand-head.png" alt="GESDOC"></h1>
+            <img src="<?=ASSETS;?>img/brand-logo.png" alt="PAGO PLUS">
+              <h1 class="brand-text"><img src="<?=ASSETS;?>img/brand-head.png" alt="PAGO PLUS"></h1>
             </a>
           </li>
           <li class="nav-item d-md-none">
@@ -25,7 +25,7 @@ data-open="click" data-menu="vertical-menu" data-col="2-columns">
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">@<?=$this->session->userdata('gs_nombres').' '.$this->session->userdata('gs_apellidos');?> <i class="ficon ft-chevron-down"></i></span>
+                <span class="mr-1">@<?=$this->session->userdata('pp_nombre').' '.$this->session->userdata('pp_apellido');?> <i class="ficon ft-chevron-down"></i></span>
                 </span>
               </a>
               <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="<?=site_url('panel').'/perfil';?>"><i class="ft-user"></i>Mi Perfil</a>
