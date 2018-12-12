@@ -13,7 +13,7 @@ class Musuario extends CI_Model {
                 'pp_id' 		   => $row->id,
 				'pp_nombre' 	   => $row->nombre,
                 'pp_apellido'     => $row->apellido,
-                'pp_cedula'        => $row->cedula,
+                'pp_cedula'        => $row->ci,
 				'pp_email' 		   => $row->email
 		);
 		$this->session->set_userdata($userData);
@@ -33,7 +33,7 @@ class Musuario extends CI_Model {
 		}else{
 			return 'error';
 		}
-	}
+
 		if ($this->db->affected_rows() > 0){
 			return 'success';
 		}else{

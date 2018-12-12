@@ -1,103 +1,69 @@
--- phpMyAdmin SQL Dump
--- version 4.7.9
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 12-12-2018 a las 11:29:53
--- Versión del servidor: 5.7.21
--- Versión de PHP: 5.6.35
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `pplus`
---
-
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Versión del servidor:         5.7.24-0ubuntu0.16.04.1 - (Ubuntu)
+-- SO del servidor:              Linux
+-- HeidiSQL Versión:             9.4.0.5125
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `operadores`
---
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-DROP TABLE IF EXISTS `operadores`;
+-- Volcando estructura para tabla pplus.operadores
 CREATE TABLE IF NOT EXISTS `operadores` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `operadores`
---
-
+-- Volcando datos para la tabla pplus.operadores: 1 rows
+/*!40000 ALTER TABLE `operadores` DISABLE KEYS */;
 INSERT INTO `operadores` (`id`, `nombre`) VALUES
-(1, 'CNT');
+	(1, 'CNT');
+/*!40000 ALTER TABLE `operadores` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `pago_facturas`
---
-
-DROP TABLE IF EXISTS `pago_facturas`;
+-- Volcando estructura para tabla pplus.pago_facturas
 CREATE TABLE IF NOT EXISTS `pago_facturas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nombres` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `cedula` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `n_factura` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `monto` double(10,2) DEFAULT NULL,
+  `usuario` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `pago_facturas`
---
+-- Volcando datos para la tabla pplus.pago_facturas: 2 rows
+/*!40000 ALTER TABLE `pago_facturas` DISABLE KEYS */;
+INSERT INTO `pago_facturas` (`id`, `nombres`, `cedula`, `n_factura`, `monto`, `usuario`) VALUES
+	(1, 'JUAN RAMIREZ', '1700393723654', '004547237294', 25.00, NULL),
+	(2, 'JOSE PANTO', '179934574743', '00485757466', 32.00, NULL),
+	(3, 'judelvis Rivas', '1745621', 'fac001', 5500.00, 1);
+/*!40000 ALTER TABLE `pago_facturas` ENABLE KEYS */;
 
-INSERT INTO `pago_facturas` (`id`, `nombres`, `cedula`, `n_factura`, `monto`) VALUES
-(1, 'JUAN RAMIREZ', '1700393723654', '004547237294', 25.00),
-(2, 'JOSE PANTO', '179934574743', '00485757466', 32.00);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `recargas`
---
-
-DROP TABLE IF EXISTS `recargas`;
+-- Volcando estructura para tabla pplus.recargas
 CREATE TABLE IF NOT EXISTS `recargas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `operador` int(1) DEFAULT NULL,
   `numero` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `monto` double(10,2) DEFAULT NULL,
+  `usuario` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `recargas`
---
+-- Volcando datos para la tabla pplus.recargas: 3 rows
+/*!40000 ALTER TABLE `recargas` DISABLE KEYS */;
+INSERT INTO `recargas` (`id`, `operador`, `numero`, `monto`, `usuario`) VALUES
+	(1, 1, '0984018400', 5.00, NULL),
+	(2, NULL, '0984018400', 10.00, NULL),
+	(3, 1, '88888', 5200.32, 1);
+/*!40000 ALTER TABLE `recargas` ENABLE KEYS */;
 
-INSERT INTO `recargas` (`id`, `operador`, `numero`, `monto`) VALUES
-(1, 1, '0984018400', 5.00),
-(2, NULL, '0984018400', 10.00);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
-
-DROP TABLE IF EXISTS `usuarios`;
+-- Volcando estructura para tabla pplus.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(80) COLLATE utf8_spanish_ci DEFAULT NULL,
   `apellido` varchar(80) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ci` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -107,14 +73,12 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `usuarios`
---
-
+-- Volcando datos para la tabla pplus.usuarios: 1 rows
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `ci`, `email`, `clave`, `activo`) VALUES
-(1, 'Paul', 'Newman', '17341736', 'paul.newman.dev@gmail.com', '25d55ad283aa400af464c76d713c07ad', 1);
-COMMIT;
+	(1, 'Paul', 'Newman', '17341736', 'paul.newman.dev@gmail.com', '202cb962ac59075b964b07152d234b70', 1);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

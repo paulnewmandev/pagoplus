@@ -47,6 +47,53 @@ class Panel extends CI_Controller {
             redirect(base_url());
         }
     }
+
+
+    function recarga(){
+        if ($this->session->has_userdata('pp_email')) {
+            $this->load->view('inc/header');
+            $this->load->view('inc/menu');
+            $this->load->view('panel/siniestro');
+            $this->load->view('inc/footer');
+        }else{
+            redirect(base_url());
+        }
+    }
+
+    function guardarRecarga(){
+        $this->load->model("mpanel","serv");
+        echo $this->serv->guardarRecarga($_POST);
+    }
+
+    function listaRecargas(){
+        $this->load->model("mpanel","serv");
+        echo json_encode($this->serv->listaRecargas());
+    }
+
+
+
+    function pagar(){
+        if ($this->session->has_userdata('pp_email')) {
+            $this->load->view('inc/header');
+            $this->load->view('inc/menu');
+            $this->load->view('panel/pagos');
+            $this->load->view('inc/footer');
+        }else{
+            redirect(base_url());
+        }
+    }
+
+    function guardarPago(){
+        $this->load->model("mpanel","serv");
+        echo $this->serv->guardarPago($_POST);
+    }
+
+    function listapagos(){
+        $this->load->model("mpanel","serv");
+        echo json_encode($this->serv->listapagos());
+    }
+
+
     public function salir(){
         session_destroy();
         $array_items = array(
