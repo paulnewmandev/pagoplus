@@ -39,6 +39,27 @@ class Mpanel extends CI_Model {
         return array("data"=>$datos);
     }
 
+    function obtenerRecarga($id){
+        $rs = $this->db->query("SELECT * FROM recargas WHERE id=".$id." limit 1");
+        return $rs->row();;
+    }
+
+    function modificarRecarga($datos){
+        $id = $datos["id"];
+        unset($datos["id"]);
+        $datos["usuario"] = $this->session->userdata("pp_id");
+        $this->db->where("id",$id);
+        $rs = $this->db->update("recargas",$datos);
+        if($rs) return "Se modificaron datos con exito";
+        return "error";
+    }
+
+    function eliminarRecarga($id){
+        $rs = $this->db->query("DELETE FROM recargas WHERE id=".$id." ");
+        if($rs) return  "Se elimino con exito";
+        return "Error al eliminar";
+    }
+
 
 
 
@@ -74,6 +95,27 @@ class Mpanel extends CI_Model {
                 "monto"=>$rec->monto,"acciones"=>$accion,"factura"=>$rec->n_factura);
         }
         return array("data"=>$datos);
+    }
+
+    function obtenerPago($id){
+        $rs = $this->db->query("SELECT * FROM pago_facturas WHERE id=".$id." limit 1");
+        return $rs->row();;
+    }
+
+    function modificarPago($datos){
+        $id = $datos["id"];
+        unset($datos["id"]);
+        $datos["usuario"] = $this->session->userdata("pp_id");
+        $this->db->where("id",$id);
+        $rs = $this->db->update("pago_facturas",$datos);
+        if($rs) return "Se modificaron datos con exito";
+        return "error";
+    }
+
+    function eliminarPago($id){
+        $rs = $this->db->query("DELETE FROM pago_facturas WHERE id=".$id." ");
+        if($rs) return  "Se elimino con exito";
+        return "Error al eliminar";
     }
 
 

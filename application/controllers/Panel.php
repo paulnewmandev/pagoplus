@@ -70,6 +70,21 @@ class Panel extends CI_Controller {
         echo json_encode($this->serv->listaRecargas());
     }
 
+    function obtenerRecarga($id){
+        $this->load->model("mpanel","serv");
+        echo json_encode($this->serv->obtenerRecarga($id));
+    }
+
+    function modificarRecarga(){
+        $this->load->model("mpanel","serv");
+        echo $this->serv->modificarRecarga($_POST);
+    }
+
+    function eliminarRecarga($id){
+        $this->load->model("mpanel","serv");
+        echo $this->serv->eliminarRecarga($id);
+    }
+
 
 
     function pagar(){
@@ -91,6 +106,21 @@ class Panel extends CI_Controller {
     function listapagos(){
         $this->load->model("mpanel","serv");
         echo json_encode($this->serv->listapagos());
+    }
+
+    function obtenerPago($id){
+        $this->load->model("mpanel","serv");
+        echo json_encode($this->serv->obtenerPago($id));
+    }
+
+    function modificarPago(){
+        $this->load->model("mpanel","serv");
+        echo $this->serv->modificarPago($_POST);
+    }
+
+    function eliminarPago($id){
+        $this->load->model("mpanel","serv");
+        echo $this->serv->eliminarPago($id);
     }
 
 

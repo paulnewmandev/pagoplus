@@ -1,4 +1,11 @@
-
+<?php
+$rs = $this->db->query("Select * from operadores");
+$filas = $rs->result();
+$optx = "";
+foreach ($filas as $fila){
+    $optx .= '<option value="'.$fila->id.'">'.$fila->nombre.'</option>';
+}
+?>
 <style>
 .modal-full {
    min-width: 100%;
@@ -39,13 +46,7 @@
                               <div class="col-md-3">
                                  <div class="form-group">
                                     <select id="operador" name="operador" class="form-control">
-                                        <?php
-                                        $rs = $this->db->query("Select * from operadores");
-                                        $filas = $rs->result();
-                                        foreach ($filas as $fila){
-                                            echo '<option value="'.$fila->id.'">'.$fila->nombre.'</option>';
-                                        }
-                                        ?>
+                                        <?=$optx?>
                                     </select>
                                  </div>
                               </div>
@@ -119,6 +120,56 @@
       </div>
    </div>
 </div>
+<div id="editarRecarga" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="frmedit" action="#" onsubmit="return false" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <select class="form-control" id="operador-edit" name="operador-edit" required>
+                                        <?=$optx?>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" id="numero-edit" name="numero-edit" placeholder="Numero" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <input type="text" id="monto-edit" name="monto-edit" placeholder="Monto" class="form-control" required>
+                                </div>
+                                <p id="mensajeRespuesta-edit"></p>
+                                <div class="col-md-12 form-group">
+                                    <input type="hidden" id="id_recarga" name="id_recarga">
+                                    <button type="submit" class="btn btn-primary  btn-block" style="background:#B3D900;border: solid 1px #B3D900;">Modificar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modalEliminar" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align:center;">
+                <a href="<?=site_url()?>"><img src="<?=ASSETS?>img/brand.png" class="img-responsive" style="margin: 0 auto;"></a>
+                <h3>¿Esta seguro de eliminar la recarga?</h3>
+                <input type="hidden" id="id-eliminar">
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-danger" onclick="eliminarRecarga()">Si</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
    $(function () {
        listar();
@@ -143,6 +194,23 @@
            });
            return false;
        })
+       $("#frmedit").submit(function() {
+           console.log("Entrando...");
+           $.ajax({
+               url: '<?=site_url('panel')?>' + '/modificarRecarga',
+               type: "POST",
+               data: "operador="+$("#operador-edit").val()+"&numero="+$('#numero-edit').val()+"&monto="+$('#monto-edit').val()+"&id="+$("#id_recarga").val(),
+               success: function(response) {
+                   $("#editarRecarga").modal("hide");
+                   $('#msg').modal('show');
+                   $('#icono').html('<i class="fa fa-check mt-25" style="font-size:70px;color:#B3D900;"></i>');
+                   $('#alerta').html('<p class="text-center">'+response+'</p>');
+                   setTimeout('document.location.reload()',5000);
+               }
+           });
+
+           return false;
+       });
    });
 
   function listar(){
@@ -172,5 +240,43 @@
            ]
        });
    }
+
+   function modalEditar(id) {
+       $.ajax({
+           url: '<?=site_url('panel')?>' + '/obtenerRecarga/'+id,
+           type:"GET",
+           dataType:"json",
+           success: function (rep) {
+               console.log(rep);
+               $("#id_recarga").val(id);
+               $("#operador-edit").val(rep.operador);
+               $("#numero-edit").val(rep.numero);
+               $("#monto-edit").val(rep.monto);
+               $("#editarRecarga").modal("show");
+           }
+       });
+   }
+
+   function modalEliminar(id){
+       $("#id-eliminar").val(id);
+       $("#modalEliminar").modal("show");
+   }
+
+   function eliminarRecarga(){
+       var id = $("#id-eliminar").val();
+       $("#modalEliminar").modal("hide");
+       $.ajax({
+           url: '<?=site_url('panel')?>' + '/eliminarRecarga/'+id,
+           type: "GET",
+           success: function(response) {
+               $('#msg').modal('show');
+               $('#icono').html('<i class="fa fa-check mt-25" style="font-size:70px;color:#B3D900;"></i>');
+               $('#alerta').html('<p class="text-center">'+response+'</p>');
+               setTimeout('document.location.reload()',5000);
+           }
+       });
+   }
+
+
 
 </script>
